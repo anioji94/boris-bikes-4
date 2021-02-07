@@ -42,4 +42,8 @@ describe Van do
 			expect(garage.hold.count).to eq(subject.cargo.count + 5) 
 		end
 	end
+
+	describe '#collect' do
+		it { is_expected.to respond_to(:collect) }
+	end
 end

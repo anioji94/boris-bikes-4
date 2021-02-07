@@ -37,4 +37,9 @@ class Van
 		deliver(garage)
 		clear_cargo
 	end
+
+	def collect(garage)
+		garage.hold.map {|bike| @cargo << bike}
+		garage.clear_hold
+	end
 end

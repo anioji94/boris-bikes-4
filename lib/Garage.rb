@@ -18,4 +18,8 @@ class Garage
 
 	end
 
+	def clear_hold
+		@hold.clear
+	end
+
 end

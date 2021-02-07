@@ -111,9 +111,18 @@ describe DockingStation do
 			garage = Garage.new
 			van.unload(garage)
 			garage.fix_all_bikes
-			print garage.hold
 			expect(garage.hold[3].broken?).to be false
+		end
+	end
 
+	describe 'performs a distribution of fixed bikes from a garage to a Docking Station' do
+		it 'should collect fixed bikes from a Garage to a Docking Station' do
+			bike = double(:bike, broken?: false)
+			garage = Garage.new; van = Van.new;
+			10.times{ garage.hold << bike }
+			# loads the garage with 10 bike doubles
+			van.collect(garage)
+			expect(van.cargo.count).to eq(10 + garage.hold.count)
 		end
 	end
 

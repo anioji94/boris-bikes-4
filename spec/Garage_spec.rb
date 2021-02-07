@@ -29,4 +29,8 @@ describe Garage do
 			expect(subject.hold[0].broken).to be false
 		end
 	end
+
+	describe '#clear_hold' do
+		it { is_expected.to respond_to(:clear_hold) }
+	end
 end
