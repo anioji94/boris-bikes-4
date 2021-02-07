@@ -52,6 +52,11 @@ class DockingStation
 		# just a quick check to see if the dock is empty, used by .release _bike.
 	end
 
+	def distribute(van)
+		van.cargo.map{|bike| @bike_list << bike}
+		van.cargo.clear
+	end
+
 	private
 	# these are private methods below
 	def dock_empty?
@@ -61,6 +66,8 @@ class DockingStation
 	def dock_full?
 		bike_list.length >= @capacity 
 	end
+
+
 
 end
 

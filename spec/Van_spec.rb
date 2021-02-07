@@ -44,6 +44,19 @@ describe Van do
 	end
 
 	describe '#collect' do
-		it { is_expected.to respond_to(:collect) }
+			it { is_expected.to respond_to(:collect) }
+		
+		
+			describe 'performs a distribution of fixed bikes from a garage to a Docking Station' do
+				it 'should collect fixed bikes from a Garage to a Docking Station' do
+					bike = double(:bike, broken?: false)
+					garage = Garage.new; ds = DockingStation.new;
+					10.times{ garage.hold << bike }
+					# loads the garage with 10 bike doubles
+					subject.collect(garage) # now the van takes all the bikes
+					ds.distribute(subject) # the dock should now take all the bikes
+					expect(ds.bike_list.count).to eq(10 + subject.cargo.count)
+				end
+			end
+		end
 	end
-end

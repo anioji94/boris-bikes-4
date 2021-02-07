@@ -100,7 +100,17 @@ describe DockingStation do
 				expect(ds.check_bike).to be true
 			end
 		end
-	end #double 
+	end 
+
+	describe '#distribute' do
+		it {is_expected.to respond_to(:distribute)}
+
+		it 'should distribute bikes from a van' do
+			van = Van.new; 10.times{ van.cargo << Bike.new }
+			subject.distribute(van)
+			expect(subject.bike_list.count).to eq(10 + van.cargo.count)
+		end
+	end
 
 	describe 'performs a delivery of broken bikes to a garage' do 
 		it 'should take broken bikes and deliver them to a garage to be fixed' do
@@ -112,17 +122,6 @@ describe DockingStation do
 			van.unload(garage)
 			garage.fix_all_bikes
 			expect(garage.hold[3].broken?).to be false
-		end
-	end
-
-	describe 'performs a distribution of fixed bikes from a garage to a Docking Station' do
-		it 'should collect fixed bikes from a Garage to a Docking Station' do
-			bike = double(:bike, broken?: false)
-			garage = Garage.new; van = Van.new;
-			10.times{ garage.hold << bike }
-			# loads the garage with 10 bike doubles
-			van.collect(garage)
-			expect(van.cargo.count).to eq(10 + garage.hold.count)
 		end
 	end
 
