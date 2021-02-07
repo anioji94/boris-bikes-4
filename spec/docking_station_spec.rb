@@ -61,6 +61,29 @@ describe DockingStation do
 		end
 	end 
 
+	describe '#move_broken_bike' do 
+		it { is_expected.to respond_to(:move_broken_bike) }
+
+		it 'should move broken bikes into a broken bike list' do 
+			bike = double(:bike, broken?: true)
+			subject.dock(bike)
+			subject.move_broken_bike
+			expect(subject.broken_bike_list.count).to eq(1)
+		end  
+	end
+
+	describe '#clear_list' do
+		it { is_expected.to respond_to(:clear_list) }
+
+		it 'should clear a list passed into it' do 
+			bike = double(:bike, broken?: true)
+			subject.dock(bike)
+			subject.move_broken_bike
+			subject.clear_list
+			expect(subject.broken_bike_list.count).to eq(0)
+		end
+	end
+
 	describe '#check_bike' do
 		context 'when a bike is available' do
 			it 'should return true' do

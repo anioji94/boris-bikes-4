@@ -13,8 +13,19 @@ describe Van do
 			ds = DockingStation.new
 			ds.dock(bike)
 			ds.dock(bike2)
-			subject.take(ds.bike_list)
+			subject.take(ds)
 			expect(subject.cargo.count && ds.bike_list.count).to eq(1)
 		end 
-	end
+
+		it 'should remove broken bikes from docking station' do
+			bike = Bike.new
+			bike.report
+			bike2 = Bike.new 
+			ds = DockingStation.new
+			ds.dock(bike)
+			ds.dock(bike2)
+			subject.take(ds)
+			expect(ds.broken_bike_list.count).to eq(0)
+		end
+	end 
 end

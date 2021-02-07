@@ -5,13 +5,14 @@ class DockingStation
 	DEFAULT_CAPACITY = 20
 	# allows for easily changing capacity
 
-	attr_reader :bike_list
+	attr_reader :bike_list, :broken_bike_list, :move_broken_bike
 	# bike_list is accessible to be read by other classes
 
 	def initialize(capacity = DEFAULT_CAPACITY)
 		# allows for variations in cap, otherwise default cap is set
 		@capacity = capacity
 		@bike_list = []
+		@broken_bike_list = []
 		# every dock has it's own bike list
 	end
 
@@ -27,6 +28,18 @@ class DockingStation
 		bike_list << bike
 		# If dock is full, it will be impossible to dock another bike.
 	end
+
+	def move_broken_bike 
+		@bike_list.each do |bike| 
+			@broken_bike_list << bike && @bike_list.delete(bike) if bike.broken? == true 
+		end 
+	end
+
+	def clear_list
+		# in irb ds.bike_list.clear worked
+		# the arg in rspec is @bike_list
+		@broken_bike_list.clear
+	end 
 
 	def check_bike
 		!bike_list.empty? 
