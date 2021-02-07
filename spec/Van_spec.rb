@@ -1,6 +1,7 @@
 require 'Van'
 require 'Bike'
 require 'Docking_station'
+require 'Garage'
 
 describe Van do
 	describe '#take' do 
