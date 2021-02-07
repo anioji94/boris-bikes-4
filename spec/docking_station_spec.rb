@@ -109,8 +109,10 @@ describe DockingStation do
 			van = Van.new
 			van.take(subject)
 			garage = Garage.new
-			# van.deliver(garage)
-			expect(van.cargo[3].broken?).to be true
+			van.unload(garage)
+			garage.fix_all_bikes
+			print garage.hold
+			expect(garage.hold[3].broken?).to be false
 
 		end
 	end
