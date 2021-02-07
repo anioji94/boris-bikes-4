@@ -31,9 +31,14 @@ class DockingStation
 	end
 
 	def move_broken_bike 
-		@bike_list.each do |bike| 
-			@broken_bike_list << bike && @bike_list.delete(bike) if bike.broken? == true 
+
+		@bike_list.map do |bike| 			
+				@broken_bike_list << bike
 		end 
+	
+		@broken_bike_list.delete_if{|bike| bike.broken? == false }
+		@bike_list.delete_if{|bike| bike.broken? == true}
+		
 	end
 
 	def clear_list

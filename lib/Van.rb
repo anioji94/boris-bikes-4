@@ -22,4 +22,8 @@ class Van
 		@cargo = @cargo.uniq
 		docking_station.clear_list
 	end
+
+	def deliver(garage)
+	end
+	
 end

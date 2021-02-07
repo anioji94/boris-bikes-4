@@ -29,4 +29,8 @@ describe Van do
 			expect(ds.broken_bike_list.count).to eq(0)
 		end
 	end 
+
+	describe '#deliver' do
+		it { is_expected.to respond_to(:deliver) }
+	end
 end

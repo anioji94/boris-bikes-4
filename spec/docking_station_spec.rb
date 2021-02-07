@@ -64,12 +64,19 @@ describe DockingStation do
 	describe '#move_broken_bike' do 
 		it { is_expected.to respond_to(:move_broken_bike) }
 
-		it 'should move broken bikes into a broken bike list' do 
+		it 'should move a broken bike into a broken bike list' do 
 			bike = double(:bike, broken?: true)
 			subject.dock(bike)
 			subject.move_broken_bike
 			expect(subject.broken_bike_list.count).to eq(1)
 		end  
+
+		it 'should move multiple broken bikes into the broken bike list' do 
+			bike = double(:bike, broken?: true)
+			10.times{ subject.dock(bike) }
+			subject.move_broken_bike
+			expect(subject.broken_bike_list.count).to eq(10)
+		end
 	end
 
 	describe '#clear_list' do
@@ -94,5 +101,18 @@ describe DockingStation do
 			end
 		end
 	end #double 
+
+	describe 'performs a delivery of broken bikes to a garage' do 
+		it 'should take broken bikes and deliver them to a garage to be fixed' do
+			10.times{ subject.dock(Bike.new) }
+			subject.bike_list.map { |bike| bike.report }
+			van = Van.new
+			van.take(subject)
+			garage = Garage.new
+			# van.deliver(garage)
+			expect(van.cargo[3].broken?).to be true
+
+		end
+	end
 
 end
