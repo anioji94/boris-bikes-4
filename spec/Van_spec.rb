@@ -32,5 +32,12 @@ describe Van do
 
 	describe '#deliver' do
 		it { is_expected.to respond_to(:deliver) }
+
+		it 'should deliver broken bikes to garage hold' do 
+			garage = Garage.new
+			5.times{ subject.cargo << Bike.new }
+			subject.unload(garage)
+			expect(garage.hold.count).to eq(subject.cargo.count + 5) 
+		end
 	end
 end
