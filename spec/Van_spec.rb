@@ -30,8 +30,10 @@ describe Van do
 		end
 	end 
 
-	describe '#deliver' do
+	describe '#deliver, #clear_cargo and #unload' do
 		it { is_expected.to respond_to(:deliver) }
+		it { is_expected.to respond_to(:clear_cargo) }
+		it { is_expected.to respond_to(:unload) }
 
 		it 'should deliver broken bikes to garage hold' do 
 			garage = Garage.new
