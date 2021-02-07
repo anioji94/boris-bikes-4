@@ -13,7 +13,5 @@ attr_reader :broken
 	end 
 end
 
-# 1.
-# Objects: Bike
-# Methods: Report
+
 
